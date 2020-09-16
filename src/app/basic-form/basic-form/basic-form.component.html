@@ -1,0 +1,85 @@
+<form [formGroup]="form">
+
+  <!-- First name -->
+  <div class="form-group">
+    <label for="firstNameInput">First Name</label>
+    <input type="text" class="form-control" id="firstNameInput" placeholder="Enter first name"
+      formControlName="firstName">
+
+    <div *ngIf="form.get('firstName').errors?.required && form.get('firstName').dirty" class="text-danger">
+      Field is required.
+    </div>
+    <div *ngIf="form.get('firstName').errors?.minlength && form.get('firstName').dirty" class="text-danger">
+      Minimum length is 3 characters.
+    </div>
+  </div>
+  <!-- /First name -->
+
+  <!-- Last name -->
+  <div class="form-group">
+    <label for="lastNameInput">Last Name</label>
+    <input type="text" class="form-control" id="lastNameInput" placeholder="Enter last name" formControlName="lastName">
+
+    <div *ngIf="form.get('lastName').errors?.required && form.get('lastName').dirty" class="text-danger">
+      Field is required.
+    </div>
+  </div>
+
+  <!-- /Last name -->
+
+  <!-- is experienced -->
+  <div class="form-group form-check">
+    <input class="form-check-input" type="checkbox" formControlName="isExperienced">
+    <label class="form-check-label">I have experience > 2 yrs </label>
+  </div>
+  <!-- /is experienced -->
+
+  <!-- Angular preference -->
+  <div class="form-group">
+    <label class="font-weight-bold">Angular Preferene</label>
+    <div class="form-check">
+      <!-- An input is missing here -->
+      <input class="form-check-input" type="radio" formControlName="angular" id="angularjs" value="1">
+      <label class="form-check-label" for="angularjs">angularJs</label>
+    </div>
+
+    <div class="form-check">
+      <!-- An input is missing here -->
+      <input class="form-check-input" type="radio" formControlName="angular" id="angular" value="2">
+      <label class="form-check-label" for="angular">angular</label>
+    </div>
+
+    <div *ngIf="form.get('angular').invalid && form.get('angular').dirty" class="text-danger">
+      Field is required.
+    </div>
+  </div>
+  <!-- /Angular preferene -->
+
+  <!-- Favourite language -->
+  <div class="form-group">
+    <label class="form-control-label">Favourite Language</label>
+    <!-- A select control is missing here -->
+    <select class="form-control" formControlName="favouriteLang">
+      <option [ngValue]="null">Select a programming language</option>
+      <option *ngFor="let lang of programmingLanguages" [ngValue]="lang">{{lang}}</option>
+    </select>
+
+    <div *ngIf="form.get('favouriteLang').invalid && form.get('favouriteLang').dirty" class="text-danger">
+      Field is required.
+    </div>
+  </div>
+  <!-- /Favourite language -->
+
+  <!-- JS Version -->
+  <div class="form-group">
+    <label>JS Version</label>
+    <input class="form-control" type="text" formControlName="jsVersion">
+
+    <div *ngIf="form.get('jsVersion').invalid && form.get('jsVersion').dirty" class="text-danger">
+      Field is required.
+    </div>
+  </div>
+  <!-- /JS Version -->
+
+  <button class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+</form>
